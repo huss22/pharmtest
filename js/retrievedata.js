@@ -19,7 +19,7 @@ function rerun (snapshot) {
 $(document).ready(function(){
 	$("#result").select2({
     placeholder: "Select a Medicine",
-    width: "30%"
+    width: "90%"
 });
 });
 
