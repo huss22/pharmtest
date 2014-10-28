@@ -12,14 +12,13 @@ function rerun (snapshot) {
   var newPost = snapshot.val();
   var date = new Date(newPost.Timestamp);
   $('#result').empty();
-  $('#result').append("<option></option>")
-  $('#result').append("<option id =  " + newPost.UID + '>' + newPost.MedName + ', Added on : ' + $.format.date(date, "ddd D of MMM, yyyy h:mm a") + '</option>');
+  $('#result').append("<li id =  " + newPost.UID + '><b>' + newPost.MedName + '</b>, Added on : ' + $.format.date(date, "ddd D of MMM, yyyy h:mm a") + '</li>');
 }
 
 $(document).ready(function(){
 	$("#result").select2({
     placeholder: "Select a Medicine",
-    width: "90%"
+    width: "30%"
 });
 });
 
