@@ -3,7 +3,6 @@ var service;
 var infowindow;
 var x = document.getElementById("pharmacyresult");
 
-
 function initialize(position) {
   getLocation();
   var pyrmont = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
@@ -19,8 +18,15 @@ function initialize(position) {
     query: 'pharmacy'
   };
 
+  var request2 = {
+    location: pyrmont,
+    radius: '500',
+    query: 'GP'
+  };
+
   service = new google.maps.places.PlacesService(map);
   service.textSearch(request, callback);
+  service.textSearch(request2, callback2);
 }
 
 function callback(results, status) {
@@ -30,10 +36,24 @@ function callback(results, status) {
   }
 }
 
+function callback2(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+      var place = results[0];
+      createMarker2(results[0]);
+  }
+}
+
 function createMarker(place) {
   $('#pharmacyresult').empty();
    $('#pharmacyresult').append('<br><b>Closest Pharmacy: </b>' + place.name + ", located at " + place.formatted_address);
    $('#pharmacyresult').append(place.opening_hours);
+   console.log(place);
+}
+
+function createMarker2(place) {
+  $('#gpresult').empty();
+   $('#gpresult').append('<br><b>Closest GP: </b>' + place.name + ", located at " + place.formatted_address);
+   $('#gpresult').append(place.opening_hours);
    console.log(place);
 }
 
@@ -46,4 +66,3 @@ function getLocation() {
 }
 
 
-google.maps.event.addDomListener(window, 'load', getLocation);
